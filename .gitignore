@@ -1,20 +1,19 @@
+# ramani: .gitignore
+# Cache
+/.cache/
+/.ruff_cache/
+__pycache__/
+
 # Environment
 /.venv/
 /.env*
 
-# SQLite database
-/db.sqlite3
-
-# Static & media files
+# Build, Static & media files
+/site/
 /public/
 
-# Vercel Deploy files
-/app/asgi.py
-/app/wsgi.py
-
-# Cache
-/.ruff_cache/
-__pycache__/
+# SQLite database
+/db.sqlite3
 
 # Temporary or Rough work
 .tmp/

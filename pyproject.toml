@@ -1,14 +1,14 @@
+# ramani: pyproject.toml
 [project]
-name = "test-vercel"
-version = "0.1.0"
+name = "test"
+version = "0.2.0"
 readme = "README.md"
-settings = "app.settings"
 authors = [{ name = "Kevin Wakhisi", email = "kevin@treeolive.tech" }]
-requires-python = ">=3.14,<3.15"
-dependencies = ["djangx[vercel]>=0.1.0.dev13", "django-dart-sass"]
+requires-python = ">=3.14"
+dependencies = []
 
-[tool.vercel.scripts]
-build = "npm i -g sass-embedded && djx sass --build && djx makemigrations && djx migrate"
+[project.urls]
+Repository = "https://github.com/christianwhocodes/test.git"
 
-[tool.uv.sources]
-django-dart-sass = { git = "https://github.com/kvnwaks/django-dart-sass.git", branch = "djv6-support" }
+[dependency-groups]
+dev = ["pre-commit>=4.7.0", "ramani>=0.1.1", "zensical>=0.1.3"]
