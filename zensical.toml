@@ -1,0 +1,69 @@
+# ramani: zensical.toml
+# Zensical configuration for the learning notes site.
+# Docs: https://zensical.org/docs/setup/basics/
+
+[project]
+site_name = "Learning Notes"
+site_description = "Personal learning notes, starting with Django."
+
+# Notes live in app/learn. Zensical derives the navigation from this folder.
+docs_dir = "app/learn"
+site_dir = "site"
+
+# Empty stub: keep it out of the published site until it has content.
+exclude_docs = """
+08-django-commands.md
+"""
+
+# [project.theme]
+# variant = "classic"   # "classic" matches the Material for MkDocs look
+
+# --- Markdown extensions -----------------------------------------------------
+# Zensical's default set (from `zensical new`), plus two changes for these notes:
+#   1. toc.slugify: GitHub-style heading ids, so the in-page "Contents" links
+#      written for GitHub (e.g. #modelsq--database-conditions) keep working.
+#   2. superfences: registers the Mermaid fence used in 01-django-models.md.
+
+[project.markdown_extensions.abbr]
+[project.markdown_extensions.admonition]
+[project.markdown_extensions.attr_list]
+[project.markdown_extensions.def_list]
+[project.markdown_extensions.footnotes]
+[project.markdown_extensions.md_in_html]
+
+[project.markdown_extensions.toc]
+permalink = true
+
+[project.markdown_extensions.toc.slugify]
+object = "pymdownx.slugs.slugify"
+kwds = { case = "lower" }
+
+[project.markdown_extensions.pymdownx.arithmatex]
+generic = true
+[project.markdown_extensions.pymdownx.betterem]
+[project.markdown_extensions.pymdownx.caret]
+[project.markdown_extensions.pymdownx.details]
+
+[project.markdown_extensions.pymdownx.emoji]
+emoji_generator = "zensical.extensions.emoji.to_svg"
+emoji_index = "zensical.extensions.emoji.twemoji"
+
+[project.markdown_extensions.pymdownx.highlight]
+anchor_linenums = true
+line_spans = "__span"
+pygments_lang_class = true
+
+[project.markdown_extensions.pymdownx.inlinehilite]
+[project.markdown_extensions.pymdownx.keys]
+[project.markdown_extensions.pymdownx.magiclink]
+[project.markdown_extensions.pymdownx.mark]
+[project.markdown_extensions.pymdownx.smartsymbols]
+
+[project.markdown_extensions.pymdownx.superfences]
+custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+
+[project.markdown_extensions.pymdownx.tasklist]
+custom_checkbox = true
+[project.markdown_extensions.pymdownx.tilde]

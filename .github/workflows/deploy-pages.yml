@@ -1,0 +1,49 @@
+# ramani: .github/workflows/deploy-pages.yml
+name: Deploy site to GitHub Pages
+
+# Build the static site and hand it straight to GitHub Pages as an artifact.
+# No gh-pages branch is created. GitHub Pages only (Vercel/Netlify can't read this).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: read # check out the repo
+  pages: write # deploy to GitHub Pages
+  id-token: write # prove the deployment comes from this workflow
+
+concurrency:
+  group: pages
+  cancel-in-progress: false # let a running deployment finish
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d # v10.4.0
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      - name: Build site
+        run: uv run zensical build
+
+      - name: Upload site as a Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
